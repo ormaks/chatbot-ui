@@ -1,16 +1,11 @@
-// Imports
-// --------------------------------------
 @import 'https://fonts.googleapis.com/css?family=Noto+Sans';
-// Variables
-// --------------------------------------
 $scrollbar-width: 5px;
 $chat-thread-bgd-color: rgba(25, 147, 147, 0.2);
 $chat-thread-msg-arrow-size: 10px;
 $chat-thread-avatar-size: 25px;
 $chat-thread-offset: #{$chat-thread-avatar-size + 20px};
 $default-shadow-color: rgb(0, 0, 0);
-// Mixins
-// --------------------------------------
+
 @mixin fancy-background() {
   background: linear-gradient(-45deg, #183850 0, #183850 25%, #192C46 50%, #22254C 75%, #22254C 100%) no-repeat fixed;
 }
@@ -177,7 +172,6 @@ body {
 
       li.other:before {
         right: -$chat-thread-offset;
-        // Placeholder avatar 1
         background-image: url(https://github.com/Thatkookooguy.png);
       }
 
@@ -195,7 +189,6 @@ body {
 
       li.self:before {
         left: -$chat-thread-offset;
-        // Placeholder avatar 2
         background-image: url(https://github.com/ortichon.png);
       }
 
@@ -208,7 +201,6 @@ body {
     .footer {
       flex-shrink: 0;
       display: flex;
-      //flex-direction: row-reverse;
       padding-top: 10px;
       max-height: 90px;
       background: transparent;
@@ -228,8 +220,6 @@ body {
   }
 }
 
-// Animation
-// --------------------------------------
 @keyframes show-chat-even {
   0% {
     margin-left: -480px;
@@ -239,43 +229,8 @@ body {
   }
 }
 
-@-moz-keyframes show-chat-even {
-  0% {
-    margin-left: -480px;
-  }
-  100% {
-    margin-left: 0;
-  }
-}
-
-@-webkit-keyframes show-chat-even {
-  0% {
-    margin-left: -480px;
-  }
-  100% {
-    margin-left: 0;
-  }
-}
 
 @keyframes show-chat-odd {
-  0% {
-    margin-right: -480px;
-  }
-  100% {
-    margin-right: 0;
-  }
-}
-
-@-moz-keyframes show-chat-odd {
-  0% {
-    margin-right: -480px;
-  }
-  100% {
-    margin-right: 0;
-  }
-}
-
-@-webkit-keyframes show-chat-odd {
   0% {
     margin-right: -480px;
   }
