@@ -62,7 +62,7 @@ function sendNewMessage() {
 
     $.ajax({
         type: "GET",
-        url: 'https://api.quotable.io/random',
+        url: 'https://api.quotable.io/random?msg="hellooo"',
         success: function (response) {
             setTimeout(function () {
                 messagesContainer.find('li.self:last-child').remove();
