@@ -32,7 +32,7 @@ function closeElement() {
     }, 500);
 }
 
-function sendNewMessage() {
+function sendNewMessage(e) {
     var userInput = $('.text-box');
     var newMessage = userInput.html().replace(/\<div\>|\<br.*?\>/ig, '\n').replace(/\<\/div\>/g, '').trim().replace(/\n/g, '<br>');
 
@@ -59,16 +59,30 @@ function sendNewMessage() {
         }, 250);
     }, 500);
     userInput.html('');
+var requestUrl = $('#msg').data('text');
 
     $.ajax({
-        type: "GET",
-        url: 'https://api.quotable.io/random?msg="hellooo"',
+        url: requestUrl,
+        type: "post",
+        dataType:'json',
+        contentType: 'application/json',
+        xhrFields: {withCredentials: true},
+        headers:{
+            "accept": "application/json",
+            "Access-Control-Allow-Origin": "*"
+        },
+        crossDomain: true,
+        data: JSON.stringify({
+            "Utterance": newMessage
+        }),
+        // url: 'https://api.quotable.io/random?msg="hellooo"',
         success: function (response) {
             setTimeout(function () {
+                console.log('response', response)
                 messagesContainer.find('li.self:last-child').remove();
                 messagesContainer.append([
                     '<li class="self">',
-                    response.content,
+                    response.split(0,20),
                     '</li>'
                 ].join(''));
                 messagesContainer.finish().animate({
@@ -76,7 +90,10 @@ function sendNewMessage() {
                 }, 250);
             }, 2000);
         },
-        error: function () {
+        error: function (errror) {
+            console.log(errror)
+            console.log('ERROR')
+
             e.preventDefault();
         }
     });
