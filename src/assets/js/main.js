@@ -27,7 +27,7 @@ function closeElement() {
     element.find('#sendMessage').off('click', sendNewMessage);
     element.find('.text-box').off('keydown', onMetaAndEnter).prop("disabled", true).blur();
     setTimeout(function () {
-        element.find('.chat').removeClass('enter').show()
+        element.find('.chat').removeClass('enter').show();
         element.click(openElement);
     }, 500);
 }
@@ -59,15 +59,15 @@ function sendNewMessage(e) {
         }, 250);
     }, 500);
     userInput.html('');
-var requestUrl = $('#msg').data('text');
+    var requestUrl = $('#msg').data('text');
 
     $.ajax({
         url: requestUrl,
         type: "post",
-        dataType:'json',
+        dataType: 'json',
         contentType: 'application/json',
         xhrFields: {withCredentials: true},
-        headers:{
+        headers: {
             "accept": "application/json",
             "Access-Control-Allow-Origin": "*"
         },
@@ -78,11 +78,11 @@ var requestUrl = $('#msg').data('text');
         // url: 'https://api.quotable.io/random?msg="hellooo"',
         success: function (response) {
             setTimeout(function () {
-                console.log('response', response)
+                var responseMsg = JSON.parse(response);
                 messagesContainer.find('li.self:last-child').remove();
                 messagesContainer.append([
                     '<li class="self">',
-                    response.split(0,20),
+                        responseMsg.prediction.topIntent,
                     '</li>'
                 ].join(''));
                 messagesContainer.finish().animate({
@@ -91,8 +91,9 @@ var requestUrl = $('#msg').data('text');
             }, 2000);
         },
         error: function (errror) {
-            console.log(errror)
-            console.log('ERROR')
+            messagesContainer.find('li.self:last-child').remove();
+            console.log(errror);
+            console.log('ERROR');
 
             e.preventDefault();
         }
@@ -102,7 +103,7 @@ var requestUrl = $('#msg').data('text');
 }
 
 function onMetaAndEnter(event) {
-    if ((event.metaKey || event.ctrlKey) && event.keyCode == 13) {
+    if ((event.metaKey || event.ctrlKey) && event.keyCode === 13) {
         sendNewMessage();
     }
 }
