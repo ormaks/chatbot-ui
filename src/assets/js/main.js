@@ -82,7 +82,7 @@ function sendNewMessage(e) {
                 messagesContainer.find('li.self:last-child').remove();
                 messagesContainer.append([
                     '<li class="self">',
-                        responseMsg.prediction.topIntent,
+                        responseMsg.queryResult.fulfillmentText,
                     '</li>'
                 ].join(''));
                 messagesContainer.finish().animate({
