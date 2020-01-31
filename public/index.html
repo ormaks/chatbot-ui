@@ -10,26 +10,43 @@
 </head>
 
 <body>
-<input type="hidden" id='msg' data-text='https://1012bf1f.ngrok.io/api/values'>
+<input type="hidden" id='msg' data-text='http://137.116.243.15:3322/api/values'>
 <div class="content">
-    <div class="floating-chat">
-        <i class="fa fa-comments" aria-hidden="true"></i>
-        <div class="chat">
-            <div class="header">
+
+    <div class="full-screen">
+        <div>
+            <h1>Welcome!</h1>
+            <h2>Here you can see a demo of the best chatbot ever</h2>
+            <br>
+        </div>
+
+        <div class="chat-arrow">
+            <span>Tap here!</span>
+            <div class="chat-arrow-wrapper">
+                <div class="arrow arrow-first"></div>
+                <div class="arrow arrow-second"></div>
+            </div>
+        </div>
+
+        <div class="floating-chat">
+            <i class="fa fa-comments" aria-hidden="true"></i>
+            <div class="chat">
+                <div class="header">
             <span class="title">
                 Your consultant
             </span>
-                <button>
-                    <span class="fa fa-times" aria-hidden="true"></span>
-                </button>
+                    <button>
+                        <span class="fa fa-times" aria-hidden="true"></span>
+                    </button>
 
-            </div>
-            <ul class="messages">
-                <li class="self">What do you want to know?</li>
-            </ul>
-            <div class="footer">
-                <div class="text-box" contenteditable="true" disabled="true"></div>
-                <button id="sendMessage">send</button>
+                </div>
+                <ul class="messages">
+                    <li class="self">What do you want to know?</li>
+                </ul>
+                <div class="footer">
+                    <div class="text-box" contenteditable="true" disabled="true"></div>
+                    <button id="sendMessage">send</button>
+                </div>
             </div>
         </div>
     </div>

@@ -14,7 +14,7 @@ gulp.task('start', ['scss'], function () {
         server: {
             baseDir: "./public"
         },
-        tunnel: true,
+        tunnel: false,
         host: 'localhost',
         port: '9000',
         logPrefix: "chatbot"
