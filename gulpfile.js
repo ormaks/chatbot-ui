@@ -88,9 +88,6 @@ gulp.task('watch', function () {
     watch('src/assets/js/**/*.js', function () {
         gulp.start('js');
     });
-    watch('src/assets/images/**/*', function () {
-        gulp.start('images');
-    });
     watch('src/assets/fonts/**/*', function () {
         gulp.start('fonts');
     });
@@ -102,7 +99,6 @@ gulp.task('build', [
     'scss',
     'html',
     'js',
-    // 'images',
     'fonts'
 ]);
 

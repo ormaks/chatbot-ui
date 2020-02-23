@@ -8,11 +8,10 @@ element.click(openElement);
 
 function openElement() {
     var messages = element.find('.messages');
-    var textInput = element.find('.text-box');
     element.find('>i').hide();
     element.addClass('expand');
     element.find('.chat').addClass('enter');
-    textInput.keydown(onMetaAndEnter).prop("disabled", false).focus();
+    $('.footer').find('#message')[0].focus();
     element.off('click', openElement);
     element.find('.header button').click(closeElement);
     element.find('#sendMessage').click(sendNewMessage);
@@ -25,7 +24,6 @@ function closeElement() {
     element.removeClass('expand');
     element.find('.header button').off('click', closeElement);
     element.find('#sendMessage').off('click', sendNewMessage);
-    element.find('.text-box').off('keydown', onMetaAndEnter).prop("disabled", true).blur();
     setTimeout(function () {
         element.find('.chat').removeClass('enter').show();
         element.click(openElement);
@@ -33,13 +31,12 @@ function closeElement() {
 }
 
 function sendNewMessage(e) {
-    var userInput = $('.text-box');
-    var newMessage = userInput.html().replace(/\<div\>|\<br.*?\>/ig, '\n').replace(/\<\/div\>/g, '').trim().replace(/\n/g, '<br>');
-
+    e.preventDefault();
+    var formElement = $('.footer');
+    var inputElement = formElement.find('#message')[0];
+    var newMessage = inputElement.value;
     if (!newMessage) return;
-
     var messagesContainer = $('.messages');
-
     messagesContainer.append([
         '<li class="other">',
         newMessage,
@@ -58,11 +55,13 @@ function sendNewMessage(e) {
             scrollTop: messagesContainer.prop("scrollHeight")
         }, 250);
     }, 500);
-    userInput.html('');
+    inputElement.value = '';
     var requestUrl = $('#msg').data('text');
 
     $.ajax({
         url: requestUrl,
+        // Here is test link with api that send random text by request(to test if server is not working)
+        // url: 'https://api.quotable.io/random?msg="hellooo"',
         type: "post",
         dataType: 'json',
         contentType: 'application/json',
@@ -75,14 +74,13 @@ function sendNewMessage(e) {
         data: JSON.stringify({
             "Utterance": newMessage
         }),
-        // url: 'https://api.quotable.io/random?msg="hellooo"',
         success: function (response) {
             setTimeout(function () {
                 var responseMsg = JSON.parse(response);
                 messagesContainer.find('li.self:last-child').remove();
                 messagesContainer.append([
                     '<li class="self">',
-                        responseMsg.queryResult.fulfillmentText,
+                    responseMsg.queryResult.fulfillmentText,
                     '</li>'
                 ].join(''));
                 messagesContainer.finish().animate({
@@ -90,20 +88,13 @@ function sendNewMessage(e) {
                 }, 250);
             }, 2000);
         },
-        error: function (errror) {
+        error: function (error) {
             messagesContainer.find('li.self:last-child').remove();
-            console.log(errror);
+            console.log(error);
             console.log('ERROR');
 
             e.preventDefault();
         }
     });
-
-    userInput.focus();
-}
-
-function onMetaAndEnter(event) {
-    if ((event.metaKey || event.ctrlKey) && event.keyCode === 13) {
-        sendNewMessage();
-    }
+    inputElement.focus();
 }

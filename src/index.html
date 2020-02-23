@@ -21,9 +21,9 @@
             <i class="fa fa-comments" aria-hidden="true"></i>
             <div class="chat">
                 <div class="header">
-            <span class="title">
-                Your consultant
-            </span>
+                    <p class="title">
+                        Your consultant
+                    </p>
                     <button>
                         <span class="fa fa-times" aria-hidden="true"></span>
                     </button>
@@ -32,10 +32,10 @@
                 <ul class="messages">
                     <li class="self">What do you want to know?</li>
                 </ul>
-                <div class="footer">
-                    <div class="text-box" contenteditable="true" disabled="true"></div>
-                    <button id="sendMessage">send</button>
-                </div>
+                <form class="footer" onsubmit="sendNewMessage">
+                    <label for="message"></label><input type="text" name="message" class="text-box" id="message"/>
+                    <button id="sendMessage" type="submit">send</button>
+                </form>
             </div>
         </div>
     </div>
